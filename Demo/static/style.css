@@ -1,0 +1,48 @@
+.container{
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 16px;
+}
+
+.jumbotron{
+    font-family: -apple-system;
+    font-size: 32px;
+    font-weight: normal;
+    text-align: center;
+}
+
+#textInput {
+    background-color:transparent;
+    font-family: -apple-system;
+    font-size: 64px;
+    font-weight: bold;
+    text-align: left;
+    border: 0px;
+}
+
+body {
+    background-color:#f9ebc8;
+}
+
+.userText {
+    color: black;
+    font-family: -apple-system;
+    font-weight: bold;
+    font-size: 64px;
+    text-align: left;
+}
+.userText span {
+    padding: 10px;
+    border-radius: 2px;
+}
+.botText {
+    color: gray;
+    font-weight: bold;
+    font-family: -apple-system;
+    font-size: 64px;
+    text-align: right;
+}
+.botText span {
+    padding: 10px;
+    border-radius: 2px;
+}

@@ -1,27 +1,11 @@
-from gtts import gTTS
-import os
-import playsound
+from transformers import RagTokenizer, RagRetriever, RagTokenForGeneration
 
+tokenizer = RagTokenizer.from_pretrained("facebook/rag-sequence-base")
+retriever = RagRetriever.from_pretrained("facebook/rag-sequence-base")
+model = RagTokenForGeneration.from_pretrained("facebook/rag-sequence-base", retriever=retriever)
 
-def speak(text):
-    tts = gTTS(text=text, lang='en')
+input_dict = tokenizer.prepare_seq2seq_batch("who holds the record in 100m freestyle", "michael phelps", return_tensors="pt")
 
-    filename = "abc.mp3"
-    tts.save(filename)
-    playsound.playsound(filename)
-    os.remove(filename)
+outputs = model(input_dict["input_ids"], labels=input_dict["labels"])
 
-
-speak("Is this someone new?")
-
-
-#exit()
-
-import pyttsx3
-engine = pyttsx3.init(driverName='nsss')
-engine.runAndWait()
-engine.say("I don't know anything about this, sorry. You've never mentioned John before. Is this someone new?")
-engine.runAndWait()
-engine.endLoop()   # add this line
-engine.stop()
-print("I don't know anything about John. Is this someone new? Can you tell me more about him?")
+loss = outputs.loss

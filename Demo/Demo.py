@@ -1,11 +1,9 @@
-from Assistant import Assistant
-from LongTermMemory import LongTermMemory
-from ShortTermMemory import ShortTermMemory
+from References.DialoGPT import DialoGPT
 import pyttsx3
 from flask import Flask, render_template, request
 import threading
 
-assistant = Assistant()
+chatbot = DialoGPT()
 app = Flask(__name__)
 engine = pyttsx3.init(driverName='nsss')
 
@@ -25,17 +23,9 @@ def index():
 def get_bot_response():
     utterance = request.args.get('msg')
 
-    if utterance == 'RESET':
-        global short_term_memory
-        global long_term_memory
-
-        short_term_memory = ShortTermMemory()
-        long_term_memory = LongTermMemory()
-        return ''
-
     while True:
         try:
-            response = assistant.respond(utterance)
+            response = chatbot.reply(utterance)
             t1 = threading.Thread(target=speak, args=(response,))
             t1.start()
             t1.join()
@@ -43,7 +33,6 @@ def get_bot_response():
         except:
             return 'I crashed and restarted!'
 
-    return ''
 
 
 if __name__ == "__main__":

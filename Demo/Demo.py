@@ -1,9 +1,9 @@
-from References.DialoGPT import DialoGPT
+from References.DialoGPT import DialoGPT as Chatbot
 import pyttsx3
 from flask import Flask, render_template, request
 import threading
 
-chatbot = DialoGPT()
+chatbot = Chatbot()
 app = Flask(__name__)
 engine = pyttsx3.init(driverName='nsss')
 
@@ -19,7 +19,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/get")
+@app.route("/get_response")
 def get_bot_response():
     utterance = request.args.get('msg')
 
@@ -32,6 +32,15 @@ def get_bot_response():
             return response
         except:
             return 'I crashed and restarted!'
+
+
+@app.route("/reset_conversation", methods=['POST'])
+def reset_conversation():
+    global chatbot
+    chatbot.reset()
+    print('New conversation started')
+    return ''
+
 
 
 

@@ -23,14 +23,12 @@
 <script>
     function getResponse() {
         let userText = $("#text_input").val();
-        let userHtml = '<p class="user_text">' + userText + '</p>';
+        let userHTML = '<p class="user_text">' + userText + '</p>';
         $("#text_input").val("");
-        $("#chatbox").append(userHtml);
-        document.getElementById('inputs').scrollIntoView({block: 'start', behavior: 'smooth'});
+        $("#chatbox").append(userHTML);
         $.get("/get", { msg: userText }).done(function(data) {
-        var botHtml = '<p class="bot_text">' + data + '</p>';
-        $("#chatbox").append(botHtml);
-        document.getElementById('inputs').scrollIntoView({block: 'start', behavior: 'smooth'});
+        let botHTML = '<p class="bot_text">' + data + '</p>';
+        $("#chatbox").append(botHTML);
 });
 }
     $("#text_input").keypress(function(e) {

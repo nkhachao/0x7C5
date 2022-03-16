@@ -16,7 +16,9 @@ class DialoGPT:
         # Transformer-based language generation models tend to repeat the same thing. This is a known issue.
         # https://github.com/microsoft/DialoGPT/issues/45
         self.chat_history_ids = self.model.generate(self.chat_history_ids, max_length=1000,
-                                                    pad_token_id=self.tokenizer.eos_token_id)
+                                                    pad_token_id=self.tokenizer.eos_token_id, do_sample=True,
+                                                    top_k=0,
+                                                    top_p=0.45)
 
         chat_history = self.tokenizer.decode(self.chat_history_ids[0])
         return chat_history.split('<|endoftext|>')[-2]

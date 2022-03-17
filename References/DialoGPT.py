@@ -20,10 +20,18 @@ class DialoGPT:
         # Generate a new response until we get one that doesn't repeat the last response
         # Generate a new response until we get one that doesn't repeat the user's message
 
-        response, chat_history_ids = self.generate_candidate_response()
+        response, chat_history_ids, score = self.generate_candidate_response()
+
+        # If the context is becoming too much for the bot to handle, reset conversation history
+        if score > -0.03:
+            self.chat_history_ids = torch.cat([torch.LongTensor([[]]), new_message_ids], dim=-1)
+            response, chat_history_ids, score = self.generate_candidate_response()
+            print('Model overwhelmed by large context. Cleared conversation history')
 
         while response.lower() == self.previous_response.lower() or response.lower() == message.lower():
-            response, chat_history_ids = self.generate_candidate_response()
+            response, chat_history_ids, score = self.generate_candidate_response()
+
+        print(score)
 
         self.previous_response = response
         self.chat_history_ids = chat_history_ids
@@ -43,9 +51,10 @@ class DialoGPT:
                                       return_dict_in_generate=True, output_scores=True)
 
         chat_history_ids = outputs['sequences']
+        score = outputs['sequences_scores'][0].item()
         chat_history = self.tokenizer.decode(chat_history_ids[0])
 
-        return chat_history.split('<|endoftext|>')[-2], chat_history_ids
+        return chat_history.split('<|endoftext|>')[-2], chat_history_ids, score
 
     def reset(self):  # Reinitialize this class is really slow. So we need a reset method instead
         self.chat_history_ids = torch.LongTensor([[]])

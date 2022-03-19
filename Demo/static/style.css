@@ -44,15 +44,11 @@ input, select, textarea, button{
     padding: 0;
     color: white;
     background-color: transparent;
-    font-size: 1.3rem;
+    font-size: 1.32rem;
     font-weight: 400;
     text-align:center;
     width: 3.2rem;
     border: none;
-}
-
-#submit_button:hover {
-  opacity: 0.7;
 }
 
 #submit_button:active {
@@ -67,14 +63,15 @@ input, select, textarea, button{
 }
 
 #divider{
-    width: 0.15rem;
-    background-color: gray;
+    width: 0.14rem;
+    background-color: white;
+    opacity: 0.3;
 }
 
 #bottom_bar{
     margin-right: 4vw;
     margin-left: 4vw;
-    height: 5rem;
+    height: 5.1rem;
     background-color: black;
     box-shadow: 0 0.1rem 0.3rem gray;
     border-radius: 10px;

@@ -1,18 +1,19 @@
 body {
     background-color: #FFE8CC;
+    -webkit-appearance: none;
 }
 
 .container{
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 0;
     padding-top: 2vw;
     justify-content: center;
 }
 
 #title{
-    margin-top: 0px;                 /* p has a default top & bottom margin of 1em */
-    margin-bottom: 0px;
+    margin-top: 0;                 /* p has a default top & bottom margin of 1em */
+    margin-bottom: 0;
     font-family: -apple-system;
     color: gray;
     font-size: 0.8rem;
@@ -21,28 +22,27 @@ body {
 }
 
 #text_input {
-    padding: 0px;
+    padding: 0;
     margin: 0.8rem;
     background-color: transparent;
     color: white;
     font-family: -apple-system;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: normal;
     text-align: left;
-    border: 0px;
+    border: 0;
     flex-grow: 1;
     outline:none;
-    -webkit-appearance: none;
 }
 
 #submit_button {
-    padding: 0px;
+    padding: 0;
     color: white;
     background-color: transparent;
     font-size: 1.3rem;
     font-weight: normal;
     text-align:center;
-    width: 3.5rem;
+    width: 3.2rem;
     border: none;
 }
 
@@ -55,18 +55,36 @@ body {
 }
 
 #inputs{
-    margin-right: 4vw;
-    margin-left: 4vw;
-    background-color: black;
-    box-shadow: 0px 0.1rem 0.3rem gray;
-    border-radius: 10px;
+    grid-area: 1 / 1 / 1 / 1;
     display: flex;
     text-align:center;      /* text-align of an element only affects its child elements */
+    width: 100%
 }
 
 #divider{
-    width: 0.16rem;
+    width: 0.15rem;
     background-color: gray;
+}
+
+#bottom_bar{
+    margin-right: 4vw;
+    margin-left: 4vw;
+    height: 5.4rem;
+    background-color: black;
+    box-shadow: 0 0.1rem 0.3rem gray;
+    border-radius: 10px;
+    display: grid;
+}
+
+#loading_bar{
+    grid-area: 1 / 1 / 1 / 1;
+    font-size: 1.2rem;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    display: none;
+    margin: auto;
+    text-align: center;
 }
 
 #messages {

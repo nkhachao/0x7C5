@@ -14,27 +14,44 @@
             <div id="chatbox"></div>
     </div>
 
-    <div id="inputs">
-        <textarea id="text_input" name="msg" rows="2" placeholder=""></textarea>
-        <div id="divider"></div>
-        <input id="submit_button" type="submit" value="↑">
+    <div id="bottom_bar">
+        <div id="inputs">
+            <textarea id="text_input" name="msg" placeholder=""></textarea>
+            <div id="divider"></div>
+            <input id="submit_button" type="submit" value="↑">
+        </div>
+
+        <div id="loading_bar">
+            <p>• • • • •</p>
+        </div>
     </div>
 
 <script>
-    function getResponse() {
-        let userText = $("#text_input").val();
-        let userHTML = '<p class="user_text">' + userText + '</p>';
-        $("#text_input").val("");
-        $("#chatbox").append(userHTML);
-        $.get("/get_response", { msg: userText }).done(function(data) {
-        let botHTML = '<p class="bot_text">' + data + '</p>';
-        $("#chatbox").append(botHTML);
-});
-}
+    var textInput = $("#text_input");
+    var inputBar = $("#inputs");
+    var loadingBar = $("#loading_bar");
 
-    $("#text_input").keypress(function(e) {
-    //if enter key is pressed
-        if(e.which == 13) {
+    function getResponse() {
+        function addMessage(message, type) {
+        let HTML = '<p class="' + type + '">' + message + '</p>';
+        $("#chatbox").append(HTML);
+        }
+
+        let userText = textInput.val();
+        addMessage(userText, 'user_text')
+        inputBar.fadeOut();
+        loadingBar.fadeIn();
+
+        textInput.val("");
+        $.get("/get_response", { msg: userText }).done(function(message) {
+            addMessage(message, 'bot_text');
+            inputBar.fadeIn();
+            loadingBar.fadeOut();
+        });
+    }
+
+    textInput.keypress(function(event) {
+        if(event.which === 13) {    //if enter key is pressed
             getResponse();
         }
     });

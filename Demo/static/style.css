@@ -1,6 +1,13 @@
+@import url('https://rsms.me/inter/inter.css');
+
 body {
     background-color: #FFE8CC;
+    font-family: 'Inter', sans-serif;
     -webkit-appearance: none;
+}
+
+input, select, textarea, button{
+    font-family:inherit;
 }
 
 .container{
@@ -14,7 +21,6 @@ body {
 #title{
     margin-top: 0;                 /* p has a default top & bottom margin of 1em */
     margin-bottom: 0;
-    font-family: -apple-system;
     color: gray;
     font-size: 0.8rem;
     font-weight: normal;
@@ -26,9 +32,8 @@ body {
     margin: 0.8rem;
     background-color: transparent;
     color: white;
-    font-family: -apple-system;
     font-size: 1.3rem;
-    font-weight: normal;
+    font-weight: 400;
     text-align: left;
     border: 0;
     flex-grow: 1;
@@ -40,7 +45,7 @@ body {
     color: white;
     background-color: transparent;
     font-size: 1.3rem;
-    font-weight: normal;
+    font-weight: 400;
     text-align:center;
     width: 3.2rem;
     border: none;
@@ -69,7 +74,7 @@ body {
 #bottom_bar{
     margin-right: 4vw;
     margin-left: 4vw;
-    height: 5.4rem;
+    height: 5rem;
     background-color: black;
     box-shadow: 0 0.1rem 0.3rem gray;
     border-radius: 10px;
@@ -102,8 +107,8 @@ body {
     margin-top: 1rem;                 /* p has a default top & bottom margin of 1em */
     margin-bottom: 1rem;
     color: black;
-    font-family: -apple-system;
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: -0.03rem;
     font-size: 2.2rem;
     text-align: left;
 }
@@ -111,9 +116,10 @@ body {
 .bot_text {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: gray;
-    font-weight: bold;
-    font-family: -apple-system;
+    color: black;
+    opacity: 0.64;
+    font-weight: 700;
+    letter-spacing: -0.03rem;
     font-size: 2.2rem;
     text-align: right;
 }

@@ -126,5 +126,5 @@ input, select, textarea, button{
     font-weight: 700;
     letter-spacing: -0.03rem;
     font-size: calc(1.9rem + 0.5vw);
-    text-align: right;
+    text-align: left;
 }

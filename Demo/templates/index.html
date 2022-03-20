@@ -28,8 +28,9 @@
 
 <script>
     const textInput = $("#text_input");
-    const inputBar = $("#inputs");
+    const submitButton = $("#submit_button");
     const loadingBar = $("#loading_bar");
+    const inputBar = $("#inputs");
 
     function getResponse() {
         function addMessage(message, type) {
@@ -56,7 +57,7 @@
         }
     });
 
-    $("#submit_button").click(function() {
+    submitButton.click(function() {
         getResponse();
     });
 

@@ -30,7 +30,7 @@ class DialoGPT:
         while response.lower() == previous_response.lower() or response.lower() == message.lower():
             response, score = self.generate_candidate_response()
 
-        print(score)
+        print('Sequence score:', score)
         self.chat_history.append(response)
 
         return response

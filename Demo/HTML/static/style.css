@@ -1,5 +1,9 @@
 @import url('https://rsms.me/inter/inter.css');
 
+html {
+    all: initial;
+}
+
 body {
     background-color: #FFE8CC;
     font-family: 'Inter', sans-serif;
@@ -8,7 +12,6 @@ body {
 
 html, body {
     margin: 0;
-    min-height: 100% !important;
     height: 100%;
 }
 
@@ -16,7 +19,7 @@ input, select, textarea, button{
     font-family:inherit;
 }
 
-.container{
+#container{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -91,8 +94,6 @@ input, select, textarea, button{
     grid-area: 1 / 1 / 1 / 1;
     font-size: 1.2rem;
     color: white;
-    background-color: black;
-    border-radius: 10px;
     display: none;
     margin: auto;
     text-align: center;
@@ -106,7 +107,7 @@ input, select, textarea, button{
     display: flex;
     flex-direction: column-reverse;
     overflow: scroll;
-    height: 100%;
+    flex-grow: 1;
 }
 
 .user_text {

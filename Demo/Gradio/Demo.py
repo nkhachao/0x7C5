@@ -7,6 +7,9 @@ chatbot = Chatbot()
 def chat(message, history):
     history = history or []       # Or returns the first True item or the last item
 
+    if not history:
+        chatbot.reset()
+
     response = chatbot.reply(message)
     history.append((message, response))
 

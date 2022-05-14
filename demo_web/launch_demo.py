@@ -1,4 +1,4 @@
-from References.DialoGPT import DialoGPT as Chatbot
+from reference_models.dialogpt import DialoGPT as Chatbot
 import pyttsx3
 from datetime import datetime
 from flask import Flask, render_template, request
@@ -10,7 +10,7 @@ engine = pyttsx3.init(driverName='nsss')
 
 
 def log(text):
-    with open('Demo/Log.txt', 'a') as file:
+    with open('demo_web/chat_history.txt', 'a') as file:
         now = datetime.now()
         current_time = now.strftime("%m/%d/%Y, %H:%M:%S")
 

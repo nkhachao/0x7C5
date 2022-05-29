@@ -1,11 +1,12 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import BartForConditionalGeneration, BartTokenizer
 
 
-class DialoGPT:
+class HEX7C5_REDDIT:
     def __init__(self):
+        super().__init__()
         self.chat_history = []
-        self.tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-large")
-        self.model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-large")
+        self.tokenizer = BartTokenizer.from_pretrained("facebook/bart-base")
+        self.model = BartForConditionalGeneration.from_pretrained("hex7c5_reddit/model")
 
     def reply(self, message):
         previous_response = self.chat_history[-1] if self.chat_history else ''
@@ -46,17 +47,13 @@ class DialoGPT:
                                       num_beams=2, do_sample=True,
                                       return_dict_in_generate=True, output_scores=True)
 
-        chat_history_ids = outputs['sequences']
+        reply_ids = outputs['sequences']
         score = outputs['sequences_scores'][0].item()
 
-        return self.ids_to_messages(chat_history_ids)[-1], score
-
-    def ids_to_messages(self, chat_history_ids):
-        decoded_string = self.tokenizer.decode(chat_history_ids[0])
-        return decoded_string.split(self.tokenizer.eos_token)[:-1]
+        return self.tokenizer.decode(reply_ids[0], skip_special_tokens=True), score
 
     def message_to_ids(self, chat_history):
-        input_string = self.tokenizer.eos_token.join(chat_history) + self.tokenizer.eos_token
+        input_string = self.tokenizer.sep_token.join(chat_history)
         return self.tokenizer.encode(input_string, return_tensors='pt')
 
     def forget_oldest_response(self):
@@ -64,3 +61,4 @@ class DialoGPT:
 
     def reset(self):  # Reinitialize this class is really slow. So we need a reset method instead
         self.chat_history = []
+
